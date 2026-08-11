@@ -354,6 +354,58 @@ tr.flagged td{background:rgba(250,204,21,.05)}
 .missgrp .mi.more{color:var(--tx3);font-style:italic}
 .selfull{width:100%;height:44px;border:1px solid var(--ln2);border-radius:11px;background:var(--bg2);
   padding:0 14px;color:var(--tx);outline:none;font-size:13.5px}
+
+.modal textarea{width:100%;border:1px solid var(--ln2);border-radius:11px;background:var(--bg2);
+  padding:11px 13px;color:var(--tx);outline:none;font-family:var(--f-m);font-size:12px;line-height:1.6;resize:vertical}
+.modal textarea:focus{border-color:var(--vi)}
+.impmsg{font-size:12.5px;color:var(--tx2);line-height:1.6;margin-bottom:4px}
+.impmsg.good{color:var(--gr)}
+.impmsg.bad{color:#FDA4AF}
+.impmsg ul{margin:8px 0 0;padding-left:18px;color:var(--tx2)}
+.impmsg li{margin-bottom:3px}
+
+/* ══ motion ══
+   Enough to show that a figure moved, never enough to distract someone reading
+   numbers at 2am. All of it is switched off for reduced-motion. */
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes grow{from{transform:scaleX(0);transform-origin:left}to{transform:none}}
+@keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.06)}100%{transform:scale(1)}}
+@keyframes glow{0%{box-shadow:0 0 0 0 rgba(139,92,246,.5)}70%{box-shadow:0 0 0 12px rgba(139,92,246,0)}100%{box-shadow:0 0 0 0 rgba(139,92,246,0)}}
+@keyframes shimmer{0%{background-position:-380px 0}100%{background-position:380px 0}}
+
+.view.on > .card,.view.on > .grid > .card,.view.on > .lead,.view.on > .grid > .kpi{
+  animation:rise .42s cubic-bezier(.22,.9,.3,1) both}
+.view.on > .grid > .kpi:nth-child(2){animation-delay:.05s}
+.view.on > .grid > .kpi:nth-child(3){animation-delay:.1s}
+.view.on > .grid > .kpi:nth-child(4){animation-delay:.15s}
+.sh{animation:fade .5s both}
+
+.brow .fl,.mini i,.prog i,.score .bar i{animation:grow .55s cubic-bezier(.22,.9,.3,1) both}
+.chart path[fill^="url"],.chart rect,.chart polygon{animation:fade .5s both}
+.donut-wrap svg path{animation:fade .6s both}
+
+/* a figure that has just changed is worth a glance, not a fanfare */
+.bumped{animation:pop .45s cubic-bezier(.3,1.4,.5,1)}
+.kpi.changed{animation:glow 1.1s ease-out}
+
+.score{transition:transform .16s ease,border-color .16s ease,background .16s ease}
+.score:hover{transform:translateX(3px)}
+.score:active{transform:scale(.995)}
+.chip,.btn{transition:transform .13s ease,background .15s ease,border-color .15s ease}
+.chip:active,.btn:active{transform:scale(.96)}
+aside nav button{transition:background .15s ease,color .15s ease,transform .13s ease}
+aside nav button:active{transform:scale(.97)}
+tbody tr{transition:background .14s ease}
+.card{transition:border-color .2s ease}
+.sheetlink{transition:color .15s ease}
+
+.skel{background:linear-gradient(90deg,var(--card2) 25%,var(--raise) 50%,var(--card2) 75%);
+  background-size:760px 100%;animation:shimmer 1.3s infinite linear;border-radius:8px;height:14px}
+
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition:none!important}
+}
 </style></head><body>
 
 <div id="auth">
@@ -386,6 +438,7 @@ tr.flagged td{background:rgba(250,204,21,.05)}
       <button data-jump="s-compare"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 8l-4 4 4 4M17 8l4 4-4 4"/></svg><span>Against last time</span></button>
       <button data-jump="s-units"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg><span>Polling units</span></button>
       <button data-jump="s-quality"><svg viewBox="0 0 24 24"><path d="M12 5a3 3 0 0 0-6 .5A2.5 2.5 0 0 0 4 8a2.6 2.6 0 0 0 .8 1.9A2.7 2.7 0 0 0 4 12a2.7 2.7 0 0 0 1.6 2.5A2.6 2.6 0 0 0 8 19a3 3 0 0 0 4-.6z"/><path d="M12 5a3 3 0 0 1 6 .5A2.5 2.5 0 0 1 20 8a2.6 2.6 0 0 1-.8 1.9A2.7 2.7 0 0 1 20 12a2.7 2.7 0 0 1-1.6 2.5A2.6 2.6 0 0 1 16 19a3 3 0 0 1-4-.6zM12 5v13.4"/></svg><span>Data quality</span></button>
+      <button data-jump="s-control"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 8 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H2a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 3.6 8a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H8a1.6 1.6 0 0 0 1-1.5V2a2 2 0 1 1 4 0v.1A1.6 1.6 0 0 0 16 3.6a1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V8a1.6 1.6 0 0 0 1.5 1H22a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg><span>Control centre</span></button>
       <button data-jump="s-forensics"><svg viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h2l2-4 2 8 2-4h2"/></svg><span>Forensics</span></button>
     </nav>
     <div class="foot">
@@ -518,15 +571,11 @@ tr.flagged td{background:rgba(250,204,21,.05)}
           <input class="psearch" id="pu-search" placeholder="Search unit, code, ward or agent"/></div>
         <div class="wrapt"><table><thead><tr id="pu-cols"></tr></thead><tbody id="pu-body"></tbody></table></div>
       </div>
-      <div class="grid g2">
-        <div class="card"><div class="hd"><h3>Still to report</h3>
-          <span class="sub" id="missing-count"></span></div><div id="missing"></div></div>
-        <div class="card"><div class="hd"><h3>Agents</h3><span class="sub" id="ag-count"></span>
-          <button class="btn pri" id="ag-add" style="margin-left:auto">Add agent</button></div>
-          <div class="wrapt"><table><thead><tr><th>Agent</th><th>Covers</th><th>LGA</th><th>Ward</th>
-            <th>Filed</th><th></th><th>Handset</th><th></th></tr></thead>
-            <tbody id="ag-body"></tbody></table></div></div>
-      </div>
+      <div class="card" style="margin-bottom:16px"><div class="hd"><h3>Still to report</h3>
+        <span class="sub" id="missing-count"></span></div><div id="missing"></div></div>
+
+      <div class="card" style="margin-bottom:16px"><div class="hd"><h3>Results that were replaced</h3>
+        <span class="sub" id="amend-count"></span></div><div id="amend"></div></div>
 
       <h2 class="sh" id="s-quality">Data quality</h2>
       <div class="grid g2">
@@ -540,6 +589,21 @@ tr.flagged td{background:rgba(250,204,21,.05)}
         <span class="sub" id="int-count"></span></div>
         <div class="wrapt"><table><thead><tr><th>Local government</th><th>Polling unit</th><th>Code</th><th>Why</th></tr></thead>
           <tbody id="int-body"></tbody></table></div></div>
+
+      <h2 class="sh" id="s-control">Control centre</h2>
+      <div class="grid g2">
+        <div class="card"><div class="hd"><h3>Agents</h3><span class="sub" id="ag-count"></span>
+          <button class="btn" id="ag-export" style="margin-left:auto">Export</button>
+          <button class="btn" id="ag-import">Load a roster</button>
+          <button class="btn pri" id="ag-add">Add one</button></div>
+          <div class="wrapt"><table><thead><tr><th>Agent</th><th>Covers</th><th>LGA</th><th>Ward</th>
+            <th>Filed</th><th></th><th>Handset</th><th></th></tr></thead>
+            <tbody id="ag-body"></tbody></table></div></div>
+      </div>
+
+        <div class="card"><div class="hd"><h3>Data source</h3></div>
+          <div id="control-source"></div></div>
+      </div>
 
       <h2 class="sh" id="s-forensics">Forensics</h2>
       <div class="grid g12">
@@ -647,7 +711,7 @@ var LGAS=['Aiyedaade','Aiyedire','Atakunmosa East','Atakunmosa West','Boluwaduro
 'Ifedayo','Ifelodun','Ila','Ilesa East','Ilesa West','Irepodun','Irewole','Isokan','Iwo',
 'Obokun','Odo-Otin','Ola-Oluwa','Olorunda','Oriade','Orolu','Osogbo'];
 
-var S={user:null,view:'overview',raw:null,data:null,history:[],against:'',sig:'',pulling:false,lastAt:0,written:'',writtenKey:'',writtenTone:'',agents:[],missing:[],missingTotal:0,puQ:'',
+var S={user:null,view:'overview',raw:null,data:null,history:[],against:'',sig:'',pulling:false,lastAt:0,written:'',writtenKey:'',writtenTone:'',agents:[],missing:[],missingTotal:0,amendments:[],puQ:'',
        F:{dist:[],lga:[],party:[]}, lgaOpen:false};
 
 /* ── helpers ── */
@@ -713,7 +777,10 @@ function build(parties,rows,unitsTotal){
   var order=parties.map(function(p){ return {code:p.code,name:p.name,colour:p.colour,logo:p.logo,votes:totals[p.code]}; })
     .sort(function(a,b){ return b.votes-a.votes; });
   return { parties:parties, totals:order, byLga:byLga, rows:rows,
-           unitsReported:rows.length, unitsTotal:unitsTotal||rows.length,
+           unitsReported:rows.length,
+           // never fall back to the number reported — that reads as 100% on the
+           // first result and is the most misleading thing a results desk can show
+           unitsTotal:unitsTotal||0, unitsKnown:!!unitsTotal,
            registered:reg, accredited:acc, valid:valid, rejected:rej, regUnits:regUnits,
            turnout: reg? pc(acc,reg) : null, lead:order.length>1?order[0].votes-order[1].votes:(order[0]?order[0].votes:0) };
 }
@@ -754,6 +821,7 @@ async function pull(quiet){
     buildLineage(s.parties);
     S.raw={parties:s.parties, rows:s.rows||[], unitsTotal:s.unitsTotal||0};
     S.agents=s.agents||[]; S.missing=s.missing||[]; S.missingTotal=s.missingTotal||0;
+    S.amendments=s.amendments||[];
     applyFilter();
     var sig=signature(S.data);
     var last=S.history[S.history.length-1];
@@ -840,6 +908,7 @@ function seedHistory(){
 
 /** Can the lead still be overturned by what has not reported? */
 function projection(d){
+  if(!d.unitsKnown) return {unknown:true, out:null};
   var out = d.unitsTotal - d.unitsReported;
   if(out<=0) return {done:true, out:0};
   var avgValid = d.unitsReported ? d.valid/d.unitsReported : 0;
@@ -908,7 +977,12 @@ function insights(d){
   var out=[], p=projection(d), lead=d.totals[0], second=d.totals[1];
   if(!d.rows.length) return [];
 
-  if(p.done){
+  if(p.unknown){
+    out.push({k:'warn',t:'How much is outstanding is not known',
+      s:fmt(d.unitsReported)+' polling unit'+(d.unitsReported===1?' has':'s have')+
+        ' reported, but the Geography tab is empty so there is nothing to measure that against. '+
+        'Paste the INEC list in and this becomes a percentage.'});
+  } else if(p.done){
     out.push({k:'good',t:'Every polling unit has reported',
       s:lead.code+' finishes on '+fmt(lead.votes)+' votes, ahead of '+second.code+' by '+fmt(d.lead)+'.'});
   } else if(p.safe){
@@ -930,6 +1004,10 @@ function insights(d){
     if(lo.length) out.push({k:'info',t:'Turnout unusually low in '+lo.length+' local government'+(lo.length>1?'s':''),
       s:lo.slice(0,3).map(function(x){ return x.lga+' at '+x.t+'%'; }).join(', ')+'.'});
   }
+
+  var amn=(S.amendments||[]).length;
+  if(amn) out.push({k:'warn',t:amn+' result'+(amn>1?'s have':' has')+' been replaced after first entry',
+    s:'Each one is listed under Polling units with the figures before and after, and who replaced whom. Replacing is normal in collation, but worth reading.'});
 
   var ig=integrity(d);
   if(ig.flagged.length) out.push({k:'warn',t:ig.flagged.length+' polling unit'+(ig.flagged.length>1?'s were':' was')+' flagged at entry',
@@ -1069,6 +1147,20 @@ function renderAll(){
   if(!S.user||!S.data) return;
   keepPlace(paintAll);
 }
+/** Marks a KPI whose figure has actually moved, so the eye is drawn to change
+    rather than to everything at once. */
+var LASTKPI={};
+function flagChanges(){
+  Array.prototype.forEach.call(document.querySelectorAll('#kpis .kpi'),function(k,i){
+    var v=k.querySelector('.v'); if(!v) return;
+    var now=v.textContent.trim();
+    if(LASTKPI[i]!==undefined && LASTKPI[i]!==now){
+      k.classList.remove('changed'); void k.offsetWidth; k.classList.add('changed');
+      v.classList.remove('bumped'); void v.offsetWidth; v.classList.add('bumped');
+    }
+    LASTKPI[i]=now;
+  });
+}
 function paintAll(){
   var d=S.data;
   document.getElementById('me-n').textContent=S.user.name;
@@ -1081,8 +1173,9 @@ function paintAll(){
   renderContests(d); renderForensics(d); renderVelocity(d); renderTwoParty(d);
   renderGauge(d); renderScatter(d); renderStacked(d); renderGrouped(d);
   renderRadar(d); renderRejected(d); renderRegVsAcc(d);
-  renderCompare(d); renderBriefing(d); renderPu(d); renderMissing(d); renderAgents(d);
+  renderCompare(d); renderBriefing(d); renderPu(d); renderMissing(d); renderAgents(d); renderAmendments(d); renderSource();
   markLive(S.lastAt?'ok':'');
+  flagChanges();
 }
 function renderKpis(d){
   var el=document.getElementById('kpis'); if(!el) return;
@@ -1098,10 +1191,12 @@ function renderKpis(d){
   el.innerHTML=
     '<div class="kpi k1"><div class="k">Total valid votes</div><div class="v">'+fmt(d.valid)+'</div>'+
       '<div class="s">'+fmt(d.rejected)+' rejected · '+fmt(d.accredited)+' accredited</div>'+sp(lead.code,'#8B5CF6')+'</div>'+
-    '<div class="kpi k2"><div class="k">Polling units reported</div><div class="v">'+repPc+'%'+
-      '<span class="chip nu">'+fmt(d.unitsReported)+'</span></div>'+
-      '<div class="s">of '+fmt(d.unitsTotal)+' expected</div>'+
-      '<div class="prog"><i style="width:'+Math.min(100,repPc)+'%"></i></div></div>'+
+    '<div class="kpi k2"><div class="k">Polling units reported</div><div class="v">'+
+      (d.unitsKnown ? repPc+'%<span class="chip nu">'+fmt(d.unitsReported)+'</span>'
+                    : fmt(d.unitsReported))+'</div>'+
+      '<div class="s">'+(d.unitsKnown ? 'of '+fmt(d.unitsTotal)+' expected'
+        : 'total unknown — load the Geography tab')+'</div>'+
+      (d.unitsKnown?'<div class="prog"><i style="width:'+Math.min(100,repPc)+'%"></i></div>':'')+'</div>'+
     '<div class="kpi k3"><div class="k">Turnout</div><div class="v">'+
       (d.turnout==null?'<span style="color:var(--tx3)">—</span>':d.turnout+'%')+'</div>'+
       '<div class="s">'+(d.turnout==null
@@ -1163,7 +1258,8 @@ function renderLead(d){
       (src?'<img src="'+esc(src)+'" alt="'+esc(t.code)+'">':esc(t.code))+'</span>'+
     '<span class="m"><span class="k">Leading</span><span class="n">'+esc(t.name)+'</span>'+
       '<span class="d">'+fmt(t.votes)+' votes · ahead of '+esc((d.totals[1]||{code:'—'}).code)+' by '+fmt(d.lead)+
-      ' · '+(p.done?'all units in':p.safe?'lead cannot be caught':fmt(p.out)+' units outstanding')+'</span></span>'+
+      ' · '+(p.unknown?fmt(d.unitsReported)+' units reported'
+             :p.done?'all units in':p.safe?'lead cannot be caught':fmt(p.out)+' units outstanding')+'</span></span>'+
     '<span class="rt"><span class="pc">'+pc(t.votes,d.valid)+'%</span></span>';
 }
 function renderFlow(d){
@@ -1272,6 +1368,22 @@ function renderIntegrity(d){
   }).join(''):'<div class="empty"><b>Turnout is consistent</b>No local government sits far from the state pattern.</div>';
 }
 
+function exportAgents(){
+  var list=S.agents||[];
+  if(!list.length){ toast('No agents to export yet','err'); return; }
+  var head=['Phone','Name','Level','LGA','Ward','PU Code','PU Name','Active','Filed','Expected'];
+  var lines=[head].concat(list.map(function(a){
+    return [a.display||a.phone,a.name,a.level,a.lga,a.ward,a.puCode,a.puName,
+            a.active?'TRUE':'FALSE',a.filed,a.expected]; }));
+  var csv=lines.map(function(r){ return r.map(function(x){ x=String(x==null?'':x);
+    return /[",\n]/.test(x)?'"'+x.replace(/"/g,'""')+'"':x; }).join(','); }).join('\n');
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download='ambo-results-agents.csv'; a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); },1000);
+  toast('Exported '+list.length+' agents','ok');
+}
+
 /* ── export ── */
 function exportCsv(){
   var d=S.data; if(!d||!d.rows.length){ toast('Nothing to export yet','err'); return; }
@@ -1364,6 +1476,11 @@ document.addEventListener('click',function(e){
   if(t.closest('#f-clear')){ clearFilters(); return; }
   if(t.closest('#lga-more')){ S.lgaOpen=!S.lgaOpen; renderFilters(); return; }
   if(t.closest('#ag-add')){ openRagent(null); return; }
+  if(t.closest('#ag-import')){ openImport(); return; }
+  if(t.closest('#imp-pick')){ document.getElementById('imp-file').click(); return; }
+  if(t.closest('#imp-tpl')){ importTemplate(); return; }
+  if(t.closest('#imp-go')){ runImport(); return; }
+  if(t.closest('#ag-export')){ exportAgents(); return; }
   var er=t.closest('[data-edit-ragent]');
   if(er){ openRagent((S.agents||[]).filter(function(a){ return String(a.phone)===er.dataset.editRagent; })[0]); return; }
   if(t.closest('#r-save')){ saveRagent(); return; }
@@ -1388,8 +1505,8 @@ document.addEventListener('click',function(e){
     return; }
   if(t.closest('#export')){ exportCsv(); return; }
   if(t.closest('#refresh')){ if(live()){ pull(); toast('Refreshed','ok'); } else { S.data=seed(); renderAll(); toast('Demo data reshuffled','ok'); } return; }
-  if(t.closest('#signout')||t.closest('#do-signout')){ signOut(); return; }
-  if(t.closest('#connectBtn')||t.closest('#connect2')){ openConnect(); return; }
+  if(t.closest('#signout')||t.closest('#do-signout')||t.closest('#signout2')){ signOut(); return; }
+  if(t.closest('#connectBtn')||t.closest('#connect2')||t.closest('#connect3')){ openConnect(); return; }
   if(t.closest('[data-close]')||t.id==='mask'){ document.getElementById('mask').classList.add('hide'); return; }
   if(t.closest('#k-test')){ testConnect(); return; }
 });
@@ -1503,6 +1620,112 @@ async function saveRagent(){
   }catch(e){ msg.textContent=e.message; }
 }
 
+/* ══ loading a roster ══ */
+function parseCsv(text){
+  var rows=[], row=[], cell='', q=false;
+  text=String(text).replace(/^\uFEFF/,'').replace(/\r\n?/g,'\n');
+  for(var i=0;i<text.length;i++){
+    var c=text[i];
+    if(q){ if(c==='"'){ if(text[i+1]==='"'){ cell+='"'; i++; } else q=false; } else cell+=c; }
+    else if(c==='"') q=true;
+    else if(c===','){ row.push(cell); cell=''; }
+    else if(c==='\n'){ row.push(cell); rows.push(row); row=[]; cell=''; }
+    else cell+=c;
+  }
+  if(cell||row.length){ row.push(cell); rows.push(row); }
+  return rows.filter(function(r){ return r.some(function(x){ return String(x).trim(); }); });
+}
+function hdrKey(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9]/g,''); }
+function mapCsv(rows){
+  if(!rows.length) return [];
+  var head=rows[0].map(hdrKey);
+  var find=function(){ for(var i=0;i<arguments.length;i++){
+    var j=head.indexOf(arguments[i]); if(j>=0) return j; } return -1; };
+  var ix={ phone:find('phone','phonenumber','mobile','number'),
+           name:find('name','agent','agentname','fullname'),
+           level:find('level','covers','type','scope'),
+           lga:find('lga','localgovernment','localgovernmentarea'),
+           ward:find('ward'),
+           puCode:find('pucode','pollingunitcode','code','pu'),
+           puName:find('puname','pollingunit','pollingunitname'),
+           active:find('active') };
+  if(ix.phone<0||ix.name<0) return null;
+  return rows.slice(1).map(function(r){
+    var o={};
+    Object.keys(ix).forEach(function(k){ o[k]= ix[k]>=0 ? String(r[ix[k]]||'').trim() : ''; });
+    return o;
+  }).filter(function(o){ return o.phone||o.name; });
+}
+function openImport(){
+  var m=document.getElementById('mask');
+  m.innerHTML='<div class="modal" style="max-width:560px"><h3>Load a roster</h3>'+
+    '<div class="sub">A spreadsheet of agents, as CSV. Column order does not matter — headings are matched by name. '+
+    'Only <b>Phone</b> and <b>Name</b> are required; a PU code makes someone a polling unit agent, and without one they cover the whole ward.</div>'+
+    '<div class="frow"><label>Paste the rows, or choose a file</label>'+
+      '<textarea id="imp-text" rows="7" placeholder="Phone,Name,Level,LGA,Ward,PU Code&#10;08051110001,Bola Adeyemi,PU,Osogbo,Ward 03,30/30/03/001&#10;08051110002,Funmi Salami,Ward,Osogbo,Ward 03,"></textarea></div>'+
+    '<div class="frow2" style="margin-bottom:12px">'+
+      '<input type="file" id="imp-file" accept=".csv,text/csv" class="hide">'+
+      '<button class="chip" id="imp-pick">Choose a file</button>'+
+      '<button class="chip" id="imp-tpl">Download a template</button>'+
+      '<span class="fnote" id="imp-file-name"></span></div>'+
+    '<div class="frow"><label>How to apply it</label><div class="frow2" id="imp-mode">'+
+      '<button type="button" class="chip on" data-mode="append">Add to the list</button>'+
+      '<button type="button" class="chip" data-mode="replace">Replace the whole list</button></div></div>'+
+    '<div id="imp-msg" class="impmsg"></div>'+
+    '<div class="mrow"><button class="btn" data-close>Cancel</button>'+
+      '<button class="btn pri" id="imp-go">Load them</button></div></div>';
+  m.classList.remove('hide');
+  IMPORT.mode='append';
+  m.addEventListener('click',function(e){
+    var b=e.target.closest('[data-mode]'); if(!b) return;
+    IMPORT.mode=b.dataset.mode;
+    Array.prototype.forEach.call(m.querySelectorAll('[data-mode]'),function(x){
+      x.classList.toggle('on',x.dataset.mode===IMPORT.mode); });
+  });
+  document.getElementById('imp-file').addEventListener('change',function(e){
+    var f=e.target.files[0]; if(!f) return;
+    var rd=new FileReader();
+    rd.onload=function(){ document.getElementById('imp-text').value=rd.result;
+      document.getElementById('imp-file-name').textContent=f.name; };
+    rd.readAsText(f);
+  });
+}
+var IMPORT={mode:'append'};
+function importTemplate(){
+  var lgas=Object.keys(S.data.byLga).sort();
+  var l1=lgas[0]||'Osogbo', l2=lgas[1]||'Ejigbo';
+  var csv='Phone,Name,Level,LGA,Ward,PU Code,PU Name,Active\n'+
+    '08051110001,Bola Adeyemi,PU,'+l1+',Ward 03,30/30/03/001,Town Hall,TRUE\n'+
+    '08051110002,Funmi Salami,Ward,'+l1+',Ward 03,,,TRUE\n'+
+    '08051110003,Tunde Ogunlaru,Ward,'+l2+',Ward 04,,,TRUE\n';
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download='ambo-results-agents-template.csv'; a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); },1000);
+}
+async function runImport(){
+  var msg=document.getElementById('imp-msg');
+  var text=document.getElementById('imp-text').value.trim();
+  if(!text){ msg.className='impmsg bad'; msg.textContent='Paste some rows or choose a file first.'; return; }
+  var rows=mapCsv(parseCsv(text));
+  if(rows===null){ msg.className='impmsg bad';
+    msg.textContent='Could not find a Phone and a Name column. The first line must be the headings.'; return; }
+  if(!rows.length){ msg.className='impmsg bad'; msg.textContent='No rows found beneath the headings.'; return; }
+  msg.className='impmsg'; msg.textContent='Checking '+rows.length+' rows…';
+  try{
+    var j=await apiPost({op:'importResultAgents',rows:rows,mode:IMPORT.mode});
+    S.agents=j.agents||S.agents;
+    var c=j.counted||{};
+    var out='<b>'+(c.imported||0)+' of '+(c.read||rows.length)+' loaded.</b>';
+    if((j.errors||[]).length) out+='<ul>'+j.errors.slice(0,12).map(function(e){ return '<li>'+esc(e)+'</li>'; }).join('')+
+      (j.errors.length>12?'<li>and '+(j.errors.length-12)+' more</li>':'')+'</ul>';
+    msg.className='impmsg '+((c.imported||0)?'good':'bad');
+    msg.innerHTML=out;
+    renderAll();
+    if(c.imported) toast(c.imported+' agents loaded','ok');
+  }catch(e){ msg.className='impmsg bad'; msg.textContent=e.message; }
+}
+
 /* ══ the filter ══
    One set of selections, applied before anything is computed, so every card,
    chart, table and the export all agree. Multiple choices are allowed at each
@@ -1572,6 +1795,7 @@ function renderFilters(){
 
 /** Which local governments are complete, and where the missing vote sits. */
 function reporting(d){
+  if(!d.unitsKnown) return [];
   var perLga={};
   Object.keys(d.byLga).forEach(function(l){ perLga[l]={in:d.byLga[l].units, reg:d.byLga[l].reg}; });
   // Units are spread roughly evenly across the state, so an LGA's expected share
@@ -1585,6 +1809,7 @@ function reporting(d){
 
 /** Who the vote still to come is likely to favour, based on where it is. */
 function outstandingLean(d){
+  if(!d.unitsKnown) return null;
   var rep=reporting(d), lead=d.totals[0], second=d.totals[1];
   if(!lead||!second) return null;
   var forLead=0, forSecond=0, totalOut=0;
@@ -1720,8 +1945,10 @@ function renderPu(d){
   if(cols) cols.innerHTML='<th>Polling unit</th><th>Local government</th><th>Ward</th>'+
     parties.map(function(p){ return '<th style="text-align:right">'+esc(p.code)+'</th>'; }).join('')+
     '<th style="text-align:right">Valid</th><th>Turnout</th><th>Sheet</th><th>Filed by</th>';
+  var replaced={}; (S.amendments||[]).forEach(function(a){ replaced[a.puCode]=(replaced[a.puCode]||0)+1; });
   el.innerHTML=rows.length?rows.slice(0,400).map(function(r){
     var t=r.registered? pc(r.accredited,r.registered) : null;
+    var rep=replaced[r.puCode];
     return '<tr'+(r.flags?' class="flagged"':'')+'>'+
       '<td class="lg">'+esc(r.puName||r.puCode)+'<span class="mono sub2">'+esc(r.puCode)+'</span></td>'+
       '<td>'+esc(r.lga)+'</td><td>'+esc(r.ward)+'</td>'+
@@ -1730,7 +1957,9 @@ function renderPu(d){
       '<td class="mono">'+(t==null?'<span style="color:var(--tx3)">—</span>':t+'%')+'</td>'+
       '<td>'+(r.photo?'<a class="sheetlink" href="'+esc(r.photo)+'" target="_blank" rel="noopener">'+I.cam+'View</a>'
                      :'<span style="color:var(--tx3)">—</span>')+'</td>'+
-      '<td>'+esc(r.agent||'')+(r.flags?'<span class="flagtag" title="'+esc(r.flags)+'">flagged</span>':'')+'</td></tr>';
+      '<td>'+esc(r.agent||'')+
+        (rep?'<span class="flagtag" style="background:rgba(139,92,246,.18);color:#A78BFA" title="Replaced '+rep+' earlier entry">replaced</span>':'')+
+        (r.flags?'<span class="flagtag" title="'+esc(r.flags)+'">flagged</span>':'')+'</td></tr>';
   }).join('')
    :'<tr><td colspan="11"><div class="empty"><b>Nothing reported yet</b>Polling units appear here as agents send them.</div></td></tr>';
 }
@@ -1761,6 +1990,46 @@ function renderMissing(d){
         return '<div class="mi"><span>'+esc(m.puName||m.puCode)+'</span><span class="mono">'+esc(m.puCode)+'</span></div>'; }).join('')+
       (byLga[l].length>10?'<div class="mi more">and '+(byLga[l].length-10)+' more</div>':'')+'</div>';
   }).join('')+'</div>';
+}
+function renderSource(){
+  var el=document.getElementById('control-source'); if(!el) return;
+  var on=live();
+  el.innerHTML=
+    '<div class="ins '+(on?'good':'warn')+'"><span class="ic">'+(on?I.tick:I.warn)+'</span><span class="m">'+
+      '<span class="t">'+(on?'Connected to the desk':'Running on demo data')+'</span>'+
+      '<span class="s">'+(on
+        ? 'Reading live results every '+(CFG.pollMs/1000)+' seconds'+
+          (S.lastAt?', last updated '+hhmm(new Date(S.lastAt)):'')+'.'
+        : 'Nothing here is real. Connect to your Apps Script deployment to see live figures.')+
+      '</span></span></div>'+
+    '<div class="actrow" style="margin-top:4px">'+
+      '<button class="btn" id="connect3">'+I.cog+(on?'Change the data source':'Connect to the desk')+'</button>'+
+      '<button class="btn" id="signout2">'+I.out+'Sign out</button></div>';
+}
+function renderAmendments(d){
+  var el=document.getElementById('amend'); if(!el) return;
+  var list=(S.amendments||[]).filter(function(a){
+    return onList(S.F.dist, districtOf(a.lga)) && onList(S.F.lga, a.lga); })
+    .sort(function(a,b){ return new Date(b.at)-new Date(a.at); });
+  var head=document.getElementById('amend-count');
+  if(head) head.textContent=list.length?(list.length+' replaced'):'';
+  if(!list.length){
+    el.innerHTML='<div class="ins good"><span class="ic">'+I.tick+'</span><span class="m">'+
+      '<span class="t">No result has been replaced</span>'+
+      '<span class="s">Every polling unit still holds the figures first entered for it.</span></span></div>';
+    return;
+  }
+  el.innerHTML='<div class="wrapt"><table><thead><tr><th>Polling unit</th><th>Was entered by</th>'+
+    '<th>Replaced by</th><th>Before</th><th>After</th><th>Change</th><th>When</th></tr></thead><tbody>'+
+    list.map(function(a){
+      return '<tr><td class="lg">'+esc(a.puName||a.puCode)+'<span class="mono sub2">'+esc(a.lga)+' · '+esc(a.puCode)+'</span></td>'+
+        '<td>'+esc(a.wasBy||'—')+'</td>'+
+        '<td>'+esc(a.by||'—')+'<span class="sub2">'+esc(a.level||'')+'</span></td>'+
+        '<td class="mono" style="font-size:11.5px">'+esc(a.was)+'</td>'+
+        '<td class="mono" style="font-size:11.5px">'+esc(a.now)+'</td>'+
+        '<td class="mono" style="font-size:11.5px;color:var(--ye)">'+esc(a.change)+'</td>'+
+        '<td class="mono">'+esc(a.at?hhmm(new Date(a.at)):'')+'</td></tr>';
+    }).join('')+'</tbody></table></div>';
 }
 function renderAgents(d){
   var el=document.getElementById('ag-body'); if(!el) return;
@@ -1793,6 +2062,10 @@ function renderAgents(d){
 /* ══ more render ══ */
 function renderReporting(d){
   var el=document.getElementById('reporting'); if(!el) return;
+  if(!d.unitsKnown){
+    el.innerHTML='<div class="empty"><b>Load the geography</b>'+
+      'Once the Geography tab holds the INEC list, this shows how much of each local government is in.</div>';
+    return; }
   var rep=reporting(d).slice(0,14);
   if(!rep.length){ el.innerHTML='<div class="empty"><b>Nothing yet</b></div>'; return; }
   el.innerHTML='<div class="bars">'+rep.map(function(r){
@@ -1805,6 +2078,12 @@ function renderReporting(d){
 function renderOutstanding(d){
   var el=document.getElementById('outstanding'); if(!el) return;
   var o=outstandingLean(d);
+  if(!d.unitsKnown){
+    el.innerHTML='<div class="ins warn"><span class="ic">'+I.warn+'</span><span class="m">'+
+      '<span class="t">Nothing to measure against yet</span>'+
+      '<span class="s">The Geography tab is empty, so how many polling units are outstanding cannot be known. '+
+      'The votes counted so far are unaffected.</span></span></div>';
+    return; }
   if(!o){ el.innerHTML='<div class="ins good"><span class="ic">'+I.tick+'</span><span class="m">'+
     '<span class="t">Everything is in</span><span class="s">No polling units are outstanding.</span></span></div>'; return; }
   var favours = o.net>0 ? o.code : o.other;
@@ -2075,6 +2354,11 @@ function topLgas(d,n){
 }
 function renderGauge(d){
   var el=document.getElementById('gauge'); if(!el) return;
+  if(!d.unitsKnown){
+    el.innerHTML='<div class="empty"><b>'+fmt(d.unitsReported)+' reported</b>'+
+      'How many to expect is unknown until the Geography tab holds the INEC list.</div>';
+    return;
+  }
   var p=pc(d.unitsReported,d.unitsTotal);
   gauge(el,p,p+'%',fmt(d.unitsReported)+' of '+fmt(d.unitsTotal)+' units');
 }
@@ -2222,11 +2506,13 @@ function briefing(d){
   var out=[], p=projection(d), lead=d.totals[0], second=d.totals[1];
   if(!d.rows.length) return ['No results have arrived yet.'];
 
-  out.push('With '+pc(d.unitsReported,d.unitsTotal)+'% of polling units in, '+lead.code+
+  out.push('With '+(d.unitsKnown? pc(d.unitsReported,d.unitsTotal)+'% of polling units in'
+                                 : fmt(d.unitsReported)+' polling unit'+(d.unitsReported===1?'':'s')+' reported')+', '+lead.code+
     ' leads on '+fmt(lead.votes)+' votes ('+pc(lead.votes,d.valid)+'% of the valid vote), ahead of '+
     (second?second.code:'—')+' by '+fmt(d.lead)+'.');
 
-  out.push(p.done ? 'All polling units have now reported.'
+  out.push(p.unknown ? 'How many polling units remain is not known, because the geography has not been loaded.'
+    : p.done ? 'All polling units have now reported.'
     : p.safe ? 'The lead is larger than the vote still outstanding, so it cannot be overturned.'
     : 'Around '+fmt(p.remaining)+' votes remain outstanding, so the result is not yet settled.');
 
