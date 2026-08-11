@@ -565,7 +565,7 @@ tr.flagged td{background:rgba(250,204,21,.05)}
 <div id="mask" class="mask hide"></div>
 <div id="toast" class="toast hide"></div>
 <script>/* The AMBO Election Results Manager — analysis dashboard */
-var CFG={mode:'DEMO',backendUrl:'',secret:'',token:'',pollMs:30000};
+var CFG={mode:'LIVE',backendUrl:'https://script.google.com/macros/s/AKfycbyeOu-G2OhEOwBsfILj6Nm07AAUeyHR4w9nn1SFDdGPqhun_15H8Nub_RaXB5y51-7T/exec',secret:'ambo2026',token:'',pollMs:30000};
 function live(){ return CFG.mode==='LIVE' && !!CFG.backendUrl; }
 function saveCfg(){ try{ localStorage.setItem('ambo.rd.cfg',JSON.stringify(CFG)); }catch(e){} }
 function loadCfg(){ try{ var c=JSON.parse(localStorage.getItem('ambo.rd.cfg')||'null');
