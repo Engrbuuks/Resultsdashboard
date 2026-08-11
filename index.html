@@ -415,6 +415,9 @@ tbody tr{transition:background .14s ease}
 aside nav [data-page].on{background:linear-gradient(135deg,rgba(139,92,246,.35),rgba(59,130,246,.22));
   color:#fff;box-shadow:inset 0 0 0 1px rgba(139,92,246,.5)}
 @media(max-width:980px){.navrule{width:1px;height:26px;margin:0 6px}}
+
+.lead .pcl{display:block;font-size:10.5px;color:var(--tx3);margin-top:4px;font-weight:400;letter-spacing:0}
+.score .gap em{font-style:normal;color:var(--tx2)}
 </style></head><body>
 
 <div id="auth">
@@ -484,7 +487,9 @@ aside nav [data-page].on{background:linear-gradient(135deg,rgba(139,92,246,.35),
       <div class="grid g4" id="kpis"></div>
 
       <div class="card" style="margin-bottom:16px"><div class="hd"><h3>Where every party stands</h3>
-        <span class="sub">Tap a party to filter the whole dashboard to it</span></div>
+        <span class="sub">Votes counted so far, and each party&rsquo;s share of them</span></div>
+        <div class="note-line">Percentages are each party&rsquo;s share of the <b>valid votes counted so far</b>,
+          not of the whole state. Tap a party to filter the dashboard to it.</div>
         <div class="scores" id="scores"></div></div>
 
       <div class="lead" id="lead" style="margin-bottom:16px"></div>
@@ -1216,9 +1221,14 @@ function renderKpis(d){
   };
   var lead=d.totals[0]||{code:'—',votes:0,colour:'#8B5CF6'};
   var repPc=pc(d.unitsReported,d.unitsTotal);
+  var second=d.totals[1]||{code:'—',votes:0};
+  var leadPts=Math.round((pc(lead.votes,d.valid)-pc(second.votes,d.valid))*10)/10;
   el.innerHTML=
-    '<div class="kpi k1"><div class="k">Total valid votes</div><div class="v">'+fmt(d.valid)+'</div>'+
-      '<div class="s">'+fmt(d.rejected)+' rejected · '+fmt(d.accredited)+' accredited</div>'+sp(lead.code,'#8B5CF6')+'</div>'+
+    '<div class="kpi k1"><div class="k">Valid votes counted</div><div class="v">'+fmt(d.valid)+'</div>'+
+      '<div class="s">'+
+        (d.rejected? fmt(d.rejected)+' rejected ballots as well' : 'no rejected ballots reported')+
+        (d.accredited? ', from '+fmt(d.accredited)+' accredited voters' : '')+'</div>'+
+      sp(lead.code,'#8B5CF6')+'</div>'+
     '<div class="kpi k2"><div class="k">Polling units reported</div><div class="v">'+
       (d.unitsKnown ? repPc+'%<span class="chip nu">'+fmt(d.unitsReported)+'</span>'
                     : fmt(d.unitsReported))+'</div>'+
@@ -1229,12 +1239,13 @@ function renderKpis(d){
       (d.turnout==null?'<span style="color:var(--tx3)">—</span>':d.turnout+'%')+'</div>'+
       '<div class="s">'+(d.turnout==null
         ? 'No polling unit has reported a register yet'
-        : fmt(d.accredited)+' of '+fmt(d.registered)+' registered'+
-          (d.regUnits<d.unitsReported ? ' · from '+fmt(d.regUnits)+' of '+fmt(d.unitsReported)+' units' : ''))+
+        : fmt(d.accredited)+' accredited out of '+fmt(d.registered)+' on the register'+
+          (d.regUnits<d.unitsReported ? ', across the '+fmt(d.regUnits)+' units that gave one' : ''))+
       '</div>'+sp('reported','#FB923C')+'</div>'+
-    '<div class="kpi k4"><div class="k">Lead</div><div class="v">'+fmt(d.lead)+'</div>'+
-      '<div class="s">'+esc(lead.code)+' over '+esc((d.totals[1]||{code:'—'}).code)+
-      ' · a margin of '+pc(d.lead,d.valid)+'% of the valid vote</div>'+sp(lead.code,'#34D399')+'</div>';
+    '<div class="kpi k4"><div class="k">Lead in votes</div><div class="v">'+fmt(d.lead)+'</div>'+
+      '<div class="s">'+esc(lead.code)+' '+pc(lead.votes,d.valid)+'% to '+esc(second.code)+' '+
+      pc(second.votes,d.valid)+'% &mdash; '+leadPts+' percentage points apart</div>'+
+      sp(lead.code,'#34D399')+'</div>';
 }
 function renderScores(d){
   var el=document.getElementById('scores'); if(!el) return;
@@ -1251,10 +1262,10 @@ function renderScores(d){
       '<span class="lg">'+partyMark(t.code,40)+'</span>'+
       '<span class="m"><span class="c">'+esc(t.code)+'</span>'+
       '<span class="n">'+esc(t.name)+'</span></span>'+
-      '<span class="v">'+fmt(t.votes)+'<em>'+share+'%</em></span>'+
+      '<span class="v">'+fmt(t.votes)+'<em>'+share+'% of valid</em></span>'+
       '<span class="bar"><i style="width:'+(top&&top.votes?Math.max(1,100*t.votes/top.votes):0)+
         '%;background:'+esc(t.colour)+'"></i></span>'+
-      '<span class="gap">'+(gap?'−'+fmt(gap):'leading')+'</span></button>';
+      '<span class="gap">'+(gap?'<em>'+fmt(gap)+'</em> behind':'leading')+'</span></button>';
   }).join('');
 }
 function renderAllLga(d){
@@ -1288,7 +1299,8 @@ function renderLead(d){
       '<span class="d">'+fmt(t.votes)+' votes · ahead of '+esc((d.totals[1]||{code:'—'}).code)+' by '+fmt(d.lead)+
       ' · '+(p.unknown?fmt(d.unitsReported)+' units reported'
              :p.done?'all units in':p.safe?'lead cannot be caught':fmt(p.out)+' units outstanding')+'</span></span>'+
-    '<span class="rt"><span class="pc">'+pc(t.votes,d.valid)+'%</span></span>';
+    '<span class="rt"><span class="pc">'+pc(t.votes,d.valid)+'%</span>'+
+      '<span class="pcl">of valid votes counted</span></span>';
 }
 function renderFlow(d){
   var el=document.getElementById('flow'); if(!el) return;
@@ -2573,14 +2585,22 @@ function compare(d){
  * Nothing here is inferred by a language model — every number in the text comes
  * from the arithmetic above, so it can be read out without checking.
  */
+function second_share(t,d){ return pc(t.votes,d.valid)+'% of the '+fmt(d.valid)+' valid votes counted'; }
 function briefing(d){
   var out=[], p=projection(d), lead=d.totals[0], second=d.totals[1];
   if(!d.rows.length) return ['No results have arrived yet.'];
 
-  out.push('With '+(d.unitsKnown? pc(d.unitsReported,d.unitsTotal)+'% of polling units in'
-                                 : fmt(d.unitsReported)+' polling unit'+(d.unitsReported===1?'':'s')+' reported')+', '+lead.code+
-    ' leads on '+fmt(lead.votes)+' votes ('+pc(lead.votes,d.valid)+'% of the valid vote), ahead of '+
-    (second?second.code:'—')+' by '+fmt(d.lead)+'.');
+  var sPc = second? pc(second.votes,d.valid) : 0;
+  var pts = second? Math.round((pc(lead.votes,d.valid)-sPc)*10)/10 : pc(lead.votes,d.valid);
+  out.push((d.unitsKnown
+      ? 'With '+pc(d.unitsReported,d.unitsTotal)+'% of polling units counted ('+
+        fmt(d.unitsReported)+' of '+fmt(d.unitsTotal)+')'
+      : 'From the '+fmt(d.unitsReported)+' polling unit'+(d.unitsReported===1?'':'s')+
+        ' counted so far, out of a total not yet known')+
+    ', '+lead.code+' has '+fmt(lead.votes)+' votes and '+second_share(lead,d)+
+    (second ? ', against '+second.code+' on '+fmt(second.votes)+' and '+sPc+'%. '+
+              'That is a lead of '+fmt(d.lead)+' votes, or '+pts+' percentage points.'
+            : '.'));
 
   out.push(p.unknown ? 'How many polling units remain is not known, because the geography has not been loaded.'
     : p.done ? 'All polling units have now reported.'
