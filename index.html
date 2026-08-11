@@ -406,6 +406,15 @@ tbody tr{transition:background .14s ease}
 @media(prefers-reduced-motion:reduce){
   *,*:before,*:after{animation:none!important;transition:none!important}
 }
+
+.note-line{font-size:11.5px;color:var(--tx3);line-height:1.6;background:var(--bg2);border-radius:10px;
+  padding:9px 12px;margin-bottom:14px;border-left:2px solid var(--vi)}
+.note-line b{color:var(--tx2)}
+
+.navrule{display:block;height:1px;background:var(--ln);margin:10px 8px}
+aside nav [data-page].on{background:linear-gradient(135deg,rgba(139,92,246,.35),rgba(59,130,246,.22));
+  color:#fff;box-shadow:inset 0 0 0 1px rgba(139,92,246,.5)}
+@media(max-width:980px){.navrule{width:1px;height:26px;margin:0 6px}}
 </style></head><body>
 
 <div id="auth">
@@ -438,8 +447,9 @@ tbody tr{transition:background .14s ease}
       <button data-jump="s-compare"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 8l-4 4 4 4M17 8l4 4-4 4"/></svg><span>Against last time</span></button>
       <button data-jump="s-units"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg><span>Polling units</span></button>
       <button data-jump="s-quality"><svg viewBox="0 0 24 24"><path d="M12 5a3 3 0 0 0-6 .5A2.5 2.5 0 0 0 4 8a2.6 2.6 0 0 0 .8 1.9A2.7 2.7 0 0 0 4 12a2.7 2.7 0 0 0 1.6 2.5A2.6 2.6 0 0 0 8 19a3 3 0 0 0 4-.6z"/><path d="M12 5a3 3 0 0 1 6 .5A2.5 2.5 0 0 1 20 8a2.6 2.6 0 0 1-.8 1.9A2.7 2.7 0 0 1 20 12a2.7 2.7 0 0 1-1.6 2.5A2.6 2.6 0 0 1 16 19a3 3 0 0 1-4-.6zM12 5v13.4"/></svg><span>Data quality</span></button>
-      <button data-jump="s-control"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 8 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H2a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 3.6 8a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H8a1.6 1.6 0 0 0 1-1.5V2a2 2 0 1 1 4 0v.1A1.6 1.6 0 0 0 16 3.6a1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V8a1.6 1.6 0 0 0 1.5 1H22a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg><span>Control centre</span></button>
       <button data-jump="s-forensics"><svg viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h2l2-4 2 8 2-4h2"/></svg><span>Forensics</span></button>
+      <span class="navrule"></span>
+      <button data-page="control"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 8 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H2a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 3.6 8a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H8a1.6 1.6 0 0 0 1-1.5V2a2 2 0 1 1 4 0v.1A1.6 1.6 0 0 0 16 3.6a1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V8a1.6 1.6 0 0 0 1.5 1H22a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg><span>Control centre</span></button>
     </nav>
     <div class="foot">
       <button class="btn" id="connect2" style="width:100%;justify-content:center;margin-bottom:10px"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 8 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H2a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 3.6 8a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H8a1.6 1.6 0 0 0 1-1.5V2a2 2 0 1 1 4 0v.1A1.6 1.6 0 0 0 16 3.6a1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V8a1.6 1.6 0 0 0 1.5 1H22a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>Data source</button>
@@ -451,8 +461,8 @@ tbody tr{transition:background .14s ease}
 
   <main>
     <div class="top">
-      <div class="t"><h1>Osun State results</h1>
-        <div class="s">Governorship election · 15 August 2026 · <span id="clock" class="mono"></span></div></div>
+      <div class="t"><h1 id="pagetitle">Osun State results</h1>
+        <div class="s" id="pagesub">Governorship election · 15 August 2026 · <span id="clock" class="mono"></span></div></div>
       <div class="r">
         <div class="live" id="livechip"><i></i><span id="livetext">LIVE</span>
           <em id="liveago"></em></div>
@@ -530,7 +540,10 @@ tbody tr{transition:background .14s ease}
           <span class="sub">Where the contest is actually being fought</span></div>
           <div id="grouped"></div><div class="legend" id="grouped-legend"></div></div>
         <div class="card"><div class="hd"><h3>Where the leader runs ahead and behind</h3>
-          <span class="sub">Points against its own state share</span></div><div id="swing"></div></div>
+          <span class="sub">Its share in each place, against its share across the whole state</span></div>
+          <div class="note-line">A reading of <b>+16</b> means the party takes sixteen percentage points more of
+            the vote there than it does state-wide. This compares places within <b>this</b> election.</div>
+          <div id="swing"></div></div>
       </div>
       <div class="card" style="margin-bottom:16px"><div class="hd"><h3>Party strength by local government</h3>
         <span class="sub">Share of the valid vote — the darker the cell, the stronger the party there</span></div>
@@ -558,7 +571,10 @@ tbody tr{transition:background .14s ease}
           <div class="sel" style="padding:7px 11px"><select id="cmp-pick"></select></div>
           <span class="sub" id="cmp-head"></span></div><div id="compare"></div></div>
         <div class="card"><div class="hd"><h3>Swing by local government</h3>
-          <span class="sub">Points gained or lost by the leader</span></div><div id="swingbars"></div></div>
+          <span class="sub">Change in the leader&rsquo;s share since the last election</span></div>
+          <div class="note-line">A reading of <b>&minus;7</b> means the party&rsquo;s share of the vote there is seven
+            percentage points lower than it was last time. This compares <b>elections</b>, not places.</div>
+          <div id="swingbars"></div></div>
       </div>
       <div class="card" style="margin-bottom:16px"><div class="hd"><h3>Local government by local government</h3>
         <span class="sub">Who won then, who is winning now, and by how much the share moved</span></div>
@@ -590,21 +606,6 @@ tbody tr{transition:background .14s ease}
         <div class="wrapt"><table><thead><tr><th>Local government</th><th>Polling unit</th><th>Code</th><th>Why</th></tr></thead>
           <tbody id="int-body"></tbody></table></div></div>
 
-      <h2 class="sh" id="s-control">Control centre</h2>
-      <div class="grid g2">
-        <div class="card"><div class="hd"><h3>Agents</h3><span class="sub" id="ag-count"></span>
-          <button class="btn" id="ag-export" style="margin-left:auto">Export</button>
-          <button class="btn" id="ag-import">Load a roster</button>
-          <button class="btn pri" id="ag-add">Add one</button></div>
-          <div class="wrapt"><table><thead><tr><th>Agent</th><th>Covers</th><th>LGA</th><th>Ward</th>
-            <th>Filed</th><th></th><th>Handset</th><th></th></tr></thead>
-            <tbody id="ag-body"></tbody></table></div></div>
-      </div>
-
-        <div class="card"><div class="hd"><h3>Data source</h3></div>
-          <div id="control-source"></div></div>
-      </div>
-
       <h2 class="sh" id="s-forensics">Forensics</h2>
       <div class="grid g12">
         <div class="card"><div class="hd"><h3>Turnout against the leader’s share</h3>
@@ -614,6 +615,30 @@ tbody tr{transition:background .14s ease}
         <div class="card"><div class="hd"><h3>Statistical checks</h3>
           <span class="sub">None of these prove anything on their own — they say where to look</span></div>
           <div id="forensics"></div></div>
+      </div>
+    </section>
+
+    <section class="view" id="view-control">
+      <h2 class="sh">Agents</h2>
+      <div class="card" style="margin-bottom:16px"><div class="hd"><h3>Results agents</h3>
+        <span class="sub" id="ag-count"></span>
+        <button class="btn" id="ag-export" style="margin-left:auto">Export</button>
+        <button class="btn" id="ag-import">Load a roster</button>
+        <button class="btn pri" id="ag-add">Add one</button></div>
+        <div class="wrapt"><table><thead><tr><th>Agent</th><th>Covers</th><th>LGA</th><th>Ward</th>
+          <th>Filed</th><th></th><th>Handset</th><th></th></tr></thead>
+          <tbody id="ag-body"></tbody></table></div>
+        <div class="note-line" style="margin:14px 0 0">Agents sign in with their phone number. The first handset to
+          use a number claims it &mdash; press <b>Release</b> if someone changes phone.</div>
+      </div>
+
+      <h2 class="sh">Data source</h2>
+      <div class="grid g2">
+        <div class="card"><div class="hd"><h3>Where the figures come from</h3></div>
+          <div id="control-source"></div></div>
+        <div class="card"><div class="hd"><h3>Compare against</h3>
+          <span class="sub">Which previous election the dashboard measures this one against</span></div>
+          <div id="control-baseline"></div></div>
       </div>
     </section>
 
@@ -711,7 +736,7 @@ var LGAS=['Aiyedaade','Aiyedire','Atakunmosa East','Atakunmosa West','Boluwaduro
 'Ifedayo','Ifelodun','Ila','Ilesa East','Ilesa West','Irepodun','Irewole','Isokan','Iwo',
 'Obokun','Odo-Otin','Ola-Oluwa','Olorunda','Oriade','Orolu','Osogbo'];
 
-var S={user:null,view:'overview',raw:null,data:null,history:[],against:'',sig:'',pulling:false,lastAt:0,written:'',writtenKey:'',writtenTone:'',agents:[],missing:[],missingTotal:0,amendments:[],puQ:'',
+var S={user:null,page:'results',view:'overview',raw:null,data:null,history:[],against:'',sig:'',pulling:false,lastAt:0,written:'',writtenKey:'',writtenTone:'',agents:[],missing:[],missingTotal:0,amendments:[],puQ:'',
        F:{dist:[],lga:[],party:[]}, lgaOpen:false};
 
 /* ── helpers ── */
@@ -1022,8 +1047,11 @@ function insights(d){
   var sw=swings(d).filter(function(x){ return x.code===lead.code; }).sort(function(a,b){ return b.delta-a.delta; });
   if(sw.length>2){
     out.push({k:'info',t:'Strongest and weakest ground for '+lead.code,
-      s:'Best in '+sw[0].lga+' ('+sw[0].share+'%, '+(sw[0].delta>0?'+':'')+sw[0].delta+' on its state share). '+
-        'Weakest in '+sw[sw.length-1].lga+' ('+sw[sw.length-1].share+'%, '+sw[sw.length-1].delta+').'});
+      s:'Best in '+sw[0].lga+', where it takes '+sw[0].share+'% \u2014 '+
+        Math.abs(sw[0].delta)+' percentage points '+(sw[0].delta>0?'above':'below')+' its '+
+        pc(lead.votes,d.valid)+'% across the state. Weakest in '+sw[sw.length-1].lga+' on '+
+        sw[sw.length-1].share+'%, '+Math.abs(sw[sw.length-1].delta)+' points '+
+        (sw[sw.length-1].delta>0?'above':'below')+'.'});
   }
 
   var rejPc=pc(d.rejected, d.rejected+d.valid);
@@ -1173,7 +1201,7 @@ function paintAll(){
   renderContests(d); renderForensics(d); renderVelocity(d); renderTwoParty(d);
   renderGauge(d); renderScatter(d); renderStacked(d); renderGrouped(d);
   renderRadar(d); renderRejected(d); renderRegVsAcc(d);
-  renderCompare(d); renderBriefing(d); renderPu(d); renderMissing(d); renderAgents(d); renderAmendments(d); renderSource();
+  renderCompare(d); renderBriefing(d); renderPu(d); renderMissing(d); renderAgents(d); renderAmendments(d); renderSource(); renderBaselinePick();
   markLive(S.lastAt?'ok':'');
   flagChanges();
 }
@@ -1206,7 +1234,7 @@ function renderKpis(d){
       '</div>'+sp('reported','#FB923C')+'</div>'+
     '<div class="kpi k4"><div class="k">Lead</div><div class="v">'+fmt(d.lead)+'</div>'+
       '<div class="s">'+esc(lead.code)+' over '+esc((d.totals[1]||{code:'—'}).code)+
-      ' · '+pc(d.lead,d.valid)+' points</div>'+sp(lead.code,'#34D399')+'</div>';
+      ' · a margin of '+pc(d.lead,d.valid)+'% of the valid vote</div>'+sp(lead.code,'#34D399')+'</div>';
 }
 function renderScores(d){
   var el=document.getElementById('scores'); if(!el) return;
@@ -1339,7 +1367,7 @@ function renderSwing(d){
         '<span style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--ln2)"></span>'+
         '<span class="fl" style="position:absolute;'+(pos?'left:50%':'right:50%')+';width:'+w.toFixed(1)+
         '%;background:'+(pos?'linear-gradient(90deg,'+esc(lead.colour)+',rgba(255,255,255,.2))':'linear-gradient(90deg,rgba(255,255,255,.2),#F43F5E)')+'"></span></span>'+
-      '<span class="vv">'+(pos?'+':'')+x.delta+'<em>'+x.share+'%</em></span></div>';
+      '<span class="vv">'+(pos?'+':'')+x.delta+'<em>'+x.share+'% here</em></span></div>';
   }).join('')+'</div>';
 }
 function renderInsights(d){
@@ -1419,6 +1447,24 @@ function exportCsv(){
 }
 
 /* ── the side menu ── */
+/** The control centre is a page of its own, not another stop on the long scroll. */
+function goPage(p){
+  S.page=p;
+  document.getElementById('view-overview').classList.toggle('on',p==='results');
+  document.getElementById('view-control').classList.toggle('on',p==='control');
+  Array.prototype.forEach.call(document.querySelectorAll('aside nav [data-page]'),function(b){
+    b.classList.toggle('on',p==='control'); });
+  if(p==='control'){
+    Array.prototype.forEach.call(document.querySelectorAll('aside nav [data-jump]'),function(b){
+      b.classList.remove('on'); });
+  }
+  document.getElementById('pagetitle').textContent =
+    p==='control' ? 'Control centre' : 'Osun State results';
+  document.getElementById('pagesub').classList.toggle('hide',p==='control');
+  window.scrollTo(0,0);
+  renderAll();
+}
+
 function toggleSide(force){
   var a=document.getElementById('side');
   var to = force===undefined ? !a.classList.contains('mini') : force;
@@ -1434,6 +1480,7 @@ function loadSide(){
 /** Marks the section you are actually looking at. */
 var spyT=null;
 function spyScroll(){
+  if(S.page!=='results') return;
   clearTimeout(spyT);
   spyT=setTimeout(function(){
     var best=null, bestD=Infinity;
@@ -1464,9 +1511,18 @@ document.addEventListener('change',function(e){
 });
 document.addEventListener('click',function(e){
   var t=e.target;
+  var pg=t.closest('[data-page]');
+  if(pg){ goPage(pg.dataset.page); return; }
   var j=t.closest('[data-jump]');
-  if(j){ var sec=document.getElementById(j.dataset.jump);
-    if(sec) sec.scrollIntoView({behavior:'smooth',block:'start'});
+  if(j){
+    // a section belongs to the results page, so come back to it first
+    if(S.page!=='results'){ goPage('results'); }
+    var sec=document.getElementById(j.dataset.jump);
+    // scrollIntoView is missing in some embedded browsers, so fall back to an offset
+    if(sec){
+      if(sec.scrollIntoView) sec.scrollIntoView({behavior:'smooth',block:'start'});
+      else window.scrollTo(0, sec.offsetTop-20);
+    }
     Array.prototype.forEach.call(document.querySelectorAll('aside nav button'),function(b){
       b.classList.toggle('on',b===j); });
     return; }
@@ -1474,6 +1530,10 @@ document.addEventListener('click',function(e){
   var f=t.closest('[data-f]');
   if(f){ toggleFilter(f.dataset.f, f.dataset.v); return; }
   if(t.closest('#f-clear')){ clearFilters(); return; }
+  var bp=t.closest('[data-baseline]');
+  if(bp){ S.against=bp.dataset.baseline;
+    if(live()) pull(); else { BASE=baselineFrom(S.against); renderAll(); }
+    toast('Comparing against '+S.against,'ok'); return; }
   if(t.closest('#lga-more')){ S.lgaOpen=!S.lgaOpen; renderFilters(); return; }
   if(t.closest('#ag-add')){ openRagent(null); return; }
   if(t.closest('#ag-import')){ openImport(); return; }
@@ -1990,6 +2050,17 @@ function renderMissing(d){
         return '<div class="mi"><span>'+esc(m.puName||m.puCode)+'</span><span class="mono">'+esc(m.puCode)+'</span></div>'; }).join('')+
       (byLga[l].length>10?'<div class="mi more">and '+(byLga[l].length-10)+' more</div>':'')+'</div>';
   }).join('')+'</div>';
+}
+function renderBaselinePick(){
+  var el=document.getElementById('control-baseline'); if(!el) return;
+  if(!BASE){ el.innerHTML='<div class="empty"><b>No previous election loaded</b>'+
+    'Paste one into the Baseline tab to switch comparison on.</div>'; return; }
+  var list=(BASE.available&&BASE.available.length)?BASE.available:[BASE.election];
+  el.innerHTML='<div class="frow2">'+list.map(function(n){
+      return '<button class="chip'+(n===BASE.election?' on':'')+'" data-baseline="'+esc(n)+'">'+esc(n)+'</button>';
+    }).join('')+'</div>'+
+    '<div class="note-line" style="margin:12px 0 0">Currently comparing against <b>'+esc(BASE.election)+
+    '</b>. Every swing figure on the results page is measured against this.</div>';
 }
 function renderSource(){
   var el=document.getElementById('control-source'); if(!el) return;
@@ -2530,9 +2601,10 @@ function briefing(d){
           ', so the comparison follows the candidate rather than the party name.');
       }
     });
-    out.push('Against '+c.election+', '+lead.code+'\u2019s share is '+
-      (sw>0?'up '+sw:sw<0?'down '+Math.abs(sw):'unchanged')+
-      (sw!==0?' points':'')+', on '+c.covered+' local governments that can be compared.');
+    out.push('Against '+c.election+', '+lead.code+'\u2019s share of the valid vote is '+
+      (sw>0?'up '+sw+' percentage points':sw<0?'down '+Math.abs(sw)+' percentage points':'unchanged')+
+      ' \u2014 '+c.thenShare[lead.code]+'% then against '+c.nowShare[lead.code]+
+      '% now, on '+c.covered+' local governments that can be compared.');
     if(c.flips.length){
       out.push(c.flips.length+' local government'+(c.flips.length>1?'s have':' has')+' changed hands: '+
         c.flips.slice(0,5).map(function(f){ return f.lga+' ('+f.then+' to '+f.now+')'; }).join(', ')+'.');
@@ -2621,13 +2693,17 @@ function renderCompare(d){
       '<span class="t">Turnout cannot be compared yet</span>'+
       '<span class="s">No polling unit has reported a register. The vote comparison above is unaffected.</span></span></div>'
     : '<div class="ins '+(Math.abs(t)>8?'warn':'info')+'"><span class="ic">'+I.info+'</span><span class="m">'+
-      '<span class="t">Turnout is '+(t>0?'up '+t:t<0?'down '+Math.abs(t):'level')+(t!==0?' points':'')+'</span>'+
+      '<span class="t">Turnout is '+(t>0?'up '+t:t<0?'down '+Math.abs(t):'level')+(t!==0?' percentage points':'')+'</span>'+
       '<span class="s">'+d.turnout+'% now against '+BASE.turnout+'% at '+esc(c.election)+
       (d.regUnits<d.unitsReported?', from the '+fmt(d.regUnits)+' units that gave one':'')+'.</span></span></div>';
 
   el.innerHTML=swRows+flip+turn;
   renderSwingBars(c,d);
   renderFlipTable(c);
+}
+function shortElection(name){
+  var m=String(name||'').match(/(\d{4})/);
+  return m ? m[1] : String(name||'last time').slice(0,12);
 }
 function renderSwingBars(c,d){
   var el=document.getElementById('swingbars'); if(!el) return;
@@ -2645,7 +2721,7 @@ function renderSwingBars(c,d){
       '<span class="fl" style="position:absolute;'+(pos?'left:50%':'right:50%')+';width:'+w.toFixed(1)+
       '%;background:'+(pos?'linear-gradient(90deg,'+esc(lead.colour)+',rgba(255,255,255,.2))'
                           :'linear-gradient(90deg,rgba(255,255,255,.2),#F43F5E)')+'"></span></span>'+
-      '<span class="vv">'+(pos?'+':'')+x.v+'<em>points</em></span></div>';
+      '<span class="vv">'+(pos?'+':'')+x.v+'<em>vs '+esc(shortElection(c.election))+'</em></span></div>';
   }).join('')+'</div>';
 }
 function renderFlipTable(c){
